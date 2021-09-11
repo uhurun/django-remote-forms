@@ -63,7 +63,17 @@ class RemoteTextInput(RemoteInput):
 
 class RemotePasswordInput(RemoteInput):
     def as_dict(self):
-        return super(RemotePasswordInput, self).as_dict()
+        widget_dict = super(RemotePasswordInput, self).as_dict()
+
+        # If render_value is None then default False
+        # https://docs.djangoproject.com/fr/3.2/ref/forms/widgets/#passwordinput
+        render_value = False
+        if self.widget.render_value is not False:
+            render_value = True
+
+        widget_dict['render_value'] = render_value
+
+        return widget_dict
 
 
 class RemoteHiddenInput(RemoteInput):
