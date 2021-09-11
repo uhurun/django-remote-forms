@@ -29,7 +29,7 @@ class RemoteField(object):
         field_dict = OrderedDict()
         field_dict['title'] = self.field.__class__.__name__
         field_dict['required'] = self.field.required
-        field_dict['label'] = _(self.field.label)
+        field_dict['label'] = _(self.field.label) if not isinstance(self.field.label, type(None)) else ''
         field_dict['initial'] = self.form_initial_data or self.field.initial
         field_dict['help_text'] = self.field.help_text
 
